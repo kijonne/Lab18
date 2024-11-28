@@ -1,0 +1,92 @@
+
+#include <iostream>
+using namespace std;
+
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) { // Внешний цикл по количеству итераций
+        for (int j = 0; j < n - i - 1; j++) { // Внутренний цикл для сравнения соседних элементов
+            if (arr[j] > arr[j + 1]) { // Если элементы в неправильном порядке
+                swap(arr[j], arr[j + 1]); // Меняем их местами
+            }
+            
+            cout << "Итерация: i = " << i << ", j = " << j << endl;
+            for (int k = 0; k < n; k++) {
+                cout << arr[k] << " "; 
+            }
+            cout << endl;
+        }
+    }
+}
+
+
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i; // Начинаем с текущей позиции
+        for (int j = i + 1; j < n; j++) { // Ищем минимальный элемент
+            if (arr[j] < arr[minIndex]) { // Если текущий элемент меньше
+                minIndex = j; // Запоминаем его индекс
+            }
+            
+            cout << "Итерация: i = " << i << ", j = " << j << endl;
+            for (int k = 0; k < n; k++) {
+                cout << arr[k] << " "; 
+            }
+            cout << endl;
+        }
+        swap(arr[minIndex], arr[i]); // Меняем местами минимальный элемент с первым неотсортированным
+    }
+}
+
+
+void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) { // Начинаем со второго элемента
+        int key = arr[i]; // Сохраняем значение текущего элемента
+        int j = i - 1; // Возвращаемся на один элемент назад
+        while (j >= 0 && arr[j] > key) { // Перемещаем элементы, которые больше key
+            arr[j + 1] = arr[j]; // Сдвигаем их на одну позицию вправо
+            j--; // Идём на одну позицию влево
+            
+            cout << "Итерация: i = " << i << ", j = " << j << endl;
+            for (int k = 0; k < n; k++) {
+                cout << arr[k] << " "; 
+            }
+            cout << endl;
+        }
+        arr[j + 1] = key; // Вставляем ключевой элемент на его позицию
+    }
+}
+
+
+int main() {
+    int arr[] = {64, 25, 12, 22, 11}; 
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    cout << "Исходный массив: ";
+    printArray(arr, n); 
+
+    cout << "\nСортировка пузырьком:\n";
+    bubbleSort(arr, n); 
+    printArray(arr, n); 
+
+    
+    int arr2[] = {64, 25, 12, 22, 11}; 
+    cout << "\nСортировка выбором минимального элемента:\n";
+    selectionSort(arr2, n); 
+    printArray(arr2, n); 
+
+    
+    int arr3[] = {64, 25, 12, 22, 11}; 
+    cout << "\nСортировка простым включением:\n";
+    insertionSort(arr3, n);
+    printArray(arr3, n); 
+
+    return 0;
+}
